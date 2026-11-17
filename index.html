@@ -439,17 +439,19 @@
         }
         /* ===== Carrusel 3D coverflow ===== */
         .cf { position: relative; max-width: 900px; margin: 1.5rem auto 0; perspective: 1400px; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
-        .cf-stage { position: relative; height: clamp(360px, 92vw, 520px); transform-style: preserve-3d; }
+        .cf { --cf-h: clamp(360px, 92vw, 520px); }
+        .cf-stage { position: relative; height: var(--cf-h); transform-style: preserve-3d; }
         .cf-slide {
             position: absolute; top: 50%; left: 50%; margin: 0;
-            width: clamp(220px, 64vw, 340px); aspect-ratio: 4 / 5;
-            padding: 8px 8px 30px; background: #FFFBF4; border-radius: 6px;
+            /* tamaño según la proporción real de cada foto, lo más grande que quepa */
+            width: min(84vw, 680px, calc((var(--cf-h) - 34px) * var(--r) + 12px));
+            padding: 6px 6px 22px; background: #FFFBF4; border-radius: 6px; box-sizing: border-box;
             box-shadow: 0 18px 40px -14px rgba(110,23,37,.55), 0 0 0 1px rgba(200,164,93,.55);
             transform: translate(-50%, -50%); transition: transform .65s cubic-bezier(.2,.75,.2,1), opacity .5s ease, filter .5s ease;
             cursor: pointer; will-change: transform;
         }
-        .cf-slide img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 3px; pointer-events: none; }
-        .cf-slide::after { content: "♥"; position: absolute; left: 0; right: 0; bottom: 5px; text-align: center; color: #C8A45D; font-size: 14px; }
+        .cf-slide img { width: 100%; height: auto; aspect-ratio: var(--r); object-fit: contain; display: block; border-radius: 3px; pointer-events: none; }
+        .cf-slide::after { content: "♥"; position: absolute; left: 0; right: 0; bottom: 3px; text-align: center; color: #C8A45D; font-size: 14px; }
         .cf-slide.is-active { box-shadow: 0 26px 50px -14px rgba(110,23,37,.7), 0 0 0 2px #C8A45D; }
         .cf-nav {
             position: absolute; top: 50%; transform: translateY(-50%); z-index: 50;
@@ -497,13 +499,8 @@
         [data-fx="paint"].fx-in img { opacity: 1; clip-path: inset(0 0 0 0 round 0); filter: drop-shadow(0 14px 22px rgba(20,4,8,.35)); transform: none; }
         [data-fx].fx-in    { opacity: 1; transform: none; filter: none; letter-spacing: normal; clip-path: inset(0 0 0 0 round 0); }
         [data-fx="title"].fx-in { letter-spacing: inherit; }
-        /* Zoom lento (Ken Burns) en la foto activa del carrusel */
-        .cf-slide.is-active img { animation: cf-kb 7s ease-in-out infinite alternate; }
-        @keyframes cf-kb { from { transform: scale(1); } to { transform: scale(1.07); } }
-        .cf-slide { overflow: hidden; }
-        @media (prefers-reduced-motion: reduce) {
+        /* @media (prefers-reduced-motion: reduce) {
             [data-fx], [data-fx] img { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; transition: none !important; }
-            .cf-slide.is-active img { animation: none; }
             .section-divider img[data-fx="bloom"] { transform: translateY(-50%) !important; }
         }
     </style>
@@ -635,13 +632,13 @@
                 <!-- Carrusel 3D (coverflow) -->
                 <div class="cf" id="coverflow" aria-roledescription="carrusel">
                   <div class="cf-stage" id="cfStage">
-                    <figure class="cf-slide" data-i="0"><img src="galeria1.jpg" alt="Félix y Rosa abrazados" style="object-position:center 30%" loading="eager" draggable="false"></figure>
-                    <figure class="cf-slide" data-i="1"><img src="galeria2.jpg" alt="Rosa sonriendo a Félix" style="object-position:68% center" loading="eager" draggable="false"></figure>
-                    <figure class="cf-slide" data-i="2"><img src="galeria3.jpg" alt="Rosa abrazando a Félix" style="object-position:center 30%" loading="eager" draggable="false"></figure>
-                    <figure class="cf-slide" data-i="3"><img src="galeria4.jpg" alt="Félix y Rosa junto a un muro colonial" style="object-position:center 35%" loading="lazy" draggable="false"></figure>
-                    <figure class="cf-slide" data-i="4"><img src="galeria5.jpg" alt="Félix y Rosa bailando en el jardín" style="object-position:center 30%" loading="lazy" draggable="false"></figure>
-                    <figure class="cf-slide" data-i="5"><img src="galeria6.jpg" alt="Félix y Rosa tomados de la mano" style="object-position:center 30%" loading="lazy" draggable="false"></figure>
-                    <figure class="cf-slide" data-i="6"><img src="galeria7.jpg" alt="Casco y estetoscopio frente a Félix y Rosa" style="object-position:center center" loading="lazy" draggable="false"></figure>
+                    <figure class="cf-slide" data-i="0" style="--r:0.8"><img src="galeria1.jpg" alt="Félix y Rosa abrazados" loading="eager" draggable="false"></figure>
+                    <figure class="cf-slide" data-i="1" style="--r:1.25"><img src="galeria2.jpg" alt="Rosa sonriendo a Félix" loading="eager" draggable="false"></figure>
+                    <figure class="cf-slide" data-i="2" style="--r:0.8"><img src="galeria3.jpg" alt="Rosa abrazando a Félix" loading="eager" draggable="false"></figure>
+                    <figure class="cf-slide" data-i="3" style="--r:0.8"><img src="galeria4.jpg" alt="Félix y Rosa junto a un muro colonial" loading="lazy" draggable="false"></figure>
+                    <figure class="cf-slide" data-i="4" style="--r:0.8"><img src="galeria5.jpg" alt="Félix y Rosa bailando en el jardín" loading="lazy" draggable="false"></figure>
+                    <figure class="cf-slide" data-i="5" style="--r:0.8"><img src="galeria6.jpg" alt="Félix y Rosa tomados de la mano" loading="lazy" draggable="false"></figure>
+                    <figure class="cf-slide" data-i="6" style="--r:1.2508"><img src="galeria7.jpg" alt="Casco y estetoscopio frente a Félix y Rosa" loading="lazy" draggable="false"></figure>
                   </div>
                   <button type="button" class="cf-nav cf-prev" id="cfPrev" aria-label="Foto anterior">&#10094;</button>
                   <button type="button" class="cf-nav cf-next" id="cfNext" aria-label="Foto siguiente">&#10095;</button>
@@ -803,7 +800,7 @@
             var lb = document.getElementById('cfLightbox'), lbImg = document.getElementById('cfLbImg');
             function off(i) { var d = i - cur; if (d > n / 2) d -= n; if (d < -n / 2) d += n; return d; }
             function render() {
-                var wide = window.innerWidth >= 768, gap = wide ? 62 : 46;
+                var wide = window.innerWidth >= 768, gap = wide ? 58 : 40;
                 slides.forEach(function (s, i) {
                     var d = off(i), a = Math.abs(d);
                     s.style.transform = 'translate(-50%,-50%) translateX(' + (d * gap) + '%) translateZ(' + (-a * 140) + 'px) rotateY(' + (-d * 32) + 'deg) scale(' + (1 - a * 0.08) + ')';
