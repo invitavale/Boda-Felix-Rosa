@@ -180,7 +180,7 @@
                   '<p class="rg-dress-intro">Te sugerimos asistir con un atuendo formal. Aquí algunas ideas:</p>' +
                   '<div class="rg-dress-grid">' +
                     '<div class="rg-dress-item"><strong>Damas</strong><span>Vestidos, conjuntos u otras piezas elegantes</span></div>' +
-                    '<div class="rg-dress-item"><strong>Caballeros</strong><span>Camisa de mangas largas, chacabana o traje</span></div>' +
+                    '<div class="rg-dress-item"><strong>Caballeros</strong><span>Camisa, chacabana o traje</span></div>' +
                   '</div>' +
                   '<div class="rg-dress-warn"><span class="rg-dress-ban">⊘</span><span>Te pedimos evitar el color <strong>blanco</strong>, reservado para la novia.</span></div>' +
                 '</div>' +
