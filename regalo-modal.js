@@ -10,19 +10,19 @@
     const REGALO = {
         mesaRegalosUrl: 'https://listaderegalos.plazalama.com.do/r/felix-y-rosa-2027',
         cuentas: [
-            { banco: 'Banco BHD', titular: 'Félix De León', filas: [
+            { banco: 'Banco BHD', titular: 'Felix De León', filas: [
                 ['Tipo de cuenta', 'Ahorros RD$'],
                 ['Número de cuenta', '26433830014'],
                 ['Cuenta estándar (IBAN)', 'DO55BCBH00000000026433830014'],
                 ['Cédula', '40223852357'],
                 ['Correo', 'felixjdeleon@hotmail.com']
             ]},
-            { banco: 'APAP', titular: 'Félix Janell De León De Los Santos', filas: [
+            { banco: 'APAP', titular: 'Felix Janell De León De Los Santos', filas: [
                 ['Tipo de cuenta', 'Ahorros'],
                 ['Número de cuenta', '1012938271'],
                 ['Cédula', '40223852357']
             ], nota: 'Desde otros bancos: Asociación Popular de Ahorros y Préstamos' },
-            { banco: 'Banreservas', titular: 'Félix Janell De León', filas: [
+            { banco: 'Banreservas', titular: 'Felix Janell De León', filas: [
                 ['Tipo de cuenta', 'Ahorros DOP'],
                 ['Número de cuenta', '9607132917'],
                 ['Cuenta estándar (IBAN)', 'DO84BRRD00000000009607132917'],
@@ -177,11 +177,12 @@
                 '<div class="rg-dress-body">' +
                   '<div class="rg-title">Código de Vestimenta</div>' +
                   '<p class="rg-dress-kind">Formal</p>' +
+                  '<p class="rg-dress-intro">Te sugerimos asistir con un atuendo formal. Aquí algunas ideas:</p>' +
                   '<div class="rg-dress-grid">' +
-                    '<div class="rg-dress-item"><strong>Damas</strong><span>Vestido</span></div>' +
-                    '<div class="rg-dress-item"><strong>Caballeros</strong><span>Traje, o chacabana con pantalón de vestir</span></div>' +
+                    '<div class="rg-dress-item"><strong>Damas</strong><span>Vestidos, conjuntos u otras piezas elegantes</span></div>' +
+                    '<div class="rg-dress-item"><strong>Caballeros</strong><span>Camisa de mangas largas, chacabana o traje</span></div>' +
                   '</div>' +
-                  '<div class="rg-dress-warn"><span class="rg-dress-ban">⊘</span><span>Prohibido el uso del color <strong>blanco</strong> en su vestuario. Es exclusivo de la novia.</span></div>' +
+                  '<div class="rg-dress-warn"><span class="rg-dress-ban">⊘</span><span>Te pedimos evitar el color <strong>blanco</strong>, reservado para la novia.</span></div>' +
                 '</div>' +
               '</div>' +
             '</div>');

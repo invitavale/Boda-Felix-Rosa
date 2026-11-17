@@ -235,3 +235,4 @@
     background: #F6E4E2; color: #5a2a2a; font-size: 1.02rem; line-height: 1.35;
 }
 .rg-dress-ban { font-size: 2rem; color: #6E1725; line-height: 1; }
+.rg-dress-intro { margin: -8px 0 16px; font-size: 1.05rem; color: rgba(46,36,20,.8); font-style: italic; }
