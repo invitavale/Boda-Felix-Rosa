@@ -528,6 +528,14 @@
             /* Columna con sombra suave para separarla del fondo */
             .content { box-shadow: 0 0 60px rgba(20,4,8,.35); }
         }
+        /* Aviso mientras carga el video del sobre (internet lento) */
+        .intro-overlay.is-loading::after {
+            content: "Cargando…"; position: absolute; left: 50%; bottom: 12%; transform: translateX(-50%);
+            padding: .5rem 1.1rem; border-radius: 999px; background: rgba(255,251,244,.92); color: #6E1725;
+            font: 600 .95rem/1 'Inter', system-ui, sans-serif; letter-spacing: .04em; z-index: 5;
+            animation: intro-load 1.2s ease-in-out infinite alternate;
+        }
+        @keyframes intro-load { from { opacity: .55; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -942,7 +950,7 @@
             onScroll();
         })();
         </script>
-        <script src="JAVAB.js?v=22" defer></script>
+        <script src="JAVAB.js?v=23" defer></script>
         <script src="regalo-modal.js?v=5" defer></script>
 </body>
 </html>

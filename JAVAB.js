@@ -60,12 +60,21 @@ function setupIntroEnvelope() {
         video.muted = true; // la canción reemplaza el sonido del video
         let p;
         try { p = video.play(); } catch (e) { useAnimFallback(); return; }
-        if (p && p.catch) p.catch(useAnimFallback);
-        // Si en 1.2 s el video no avanzó, usar la animación
-        setTimeout(function() {
-            if (!finished && !usingAnim && video.currentTime < 0.1) useAnimFallback();
-        }, 1200);
+        if (p && p.catch) p.catch(function(err) {
+            // Solo si el navegador RECHAZA reproducir (no si está cargando)
+            if (err && err.name === 'AbortError') return;
+            useAnimFallback();
+        });
+        // Con internet lento el video tarda en cargar: se espera (se ve el
+        // sobre y un aviso "Cargando…"). Si a los 8 s no arrancó, se entra
+        // directo a la invitación en vez de quedarse trabado.
+        setTimeout(function() { if (!videoPlaying && !finished && !usingAnim) overlay.classList.add('is-loading'); }, 900);
+        setTimeout(function() { if (!videoPlaying && !finished && !usingAnim) finishIntro(); }, 8000);
     }
+    let videoPlaying = false;
+    video.addEventListener('playing', function() { videoPlaying = true; overlay.classList.remove('is-loading'); });
+    // Asegura que el video empiece a descargarse apenas abre la página
+    try { video.preload = 'auto'; video.load(); } catch (e) {}
 
     overlay.addEventListener('click', start);
 
