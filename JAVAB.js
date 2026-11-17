@@ -395,6 +395,8 @@ function showTips() {
     const modal = document.getElementById('tipsModal');
     if (modal) {
         modal.style.display = 'flex';
+        document.body.classList.add('tn-open');
+        const sc = modal.querySelector('.tn-scroll'); if (sc) sc.scrollTop = 0;
     }
 }
 
@@ -402,8 +404,13 @@ function closeTipsModal() {
     const modal = document.getElementById('tipsModal');
     if (modal) {
         modal.style.display = 'none';
+        document.body.classList.remove('tn-open');
     }
 }
+document.addEventListener('keydown', function(e) {
+    const m = document.getElementById('tipsModal');
+    if (e.key === 'Escape' && m && m.style.display === 'flex') closeTipsModal();
+});
 
 // Regalos: el modal (datos bancarios / mesa de regalos) vive en regalo-modal.js
 function showGifts() {

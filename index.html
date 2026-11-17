@@ -536,6 +536,50 @@
             animation: intro-load 1.2s ease-in-out infinite alternate;
         }
         @keyframes intro-load { from { opacity: .55; } to { opacity: 1; } }
+        /* ===== Modal Tips y Notas ===== */
+        .tn-overlay { align-items: center; justify-content: center; padding: 16px; background: rgba(30,6,11,.72) !important; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 2500; }
+        .tn-sheet {
+            position: relative; width: 100%; max-width: 560px; max-height: 88vh; max-height: 88svh;
+            border-radius: 22px; overflow: hidden;
+            background:
+                radial-gradient(120% 60% at 0% 0%, rgba(200,164,93,.20), transparent 60%),
+                radial-gradient(120% 60% at 100% 100%, rgba(110,23,37,.14), transparent 60%),
+                linear-gradient(180deg, #FFFBF4 0%, #F8EFE2 100%);
+            box-shadow: 0 30px 70px -20px rgba(0,0,0,.55), 0 0 0 1px rgba(200,164,93,.55), inset 0 0 0 8px rgba(255,251,244,.6), inset 0 0 0 9px rgba(200,164,93,.35);
+            animation: tn-in .45s cubic-bezier(.2,.75,.2,1);
+        }
+        @keyframes tn-in { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
+        .tn-scroll { max-height: inherit; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 24px 28px; text-align: center; overscroll-behavior: contain; }
+        .tn-garland { display: block; width: calc(100% + 24px); margin: 14px -12px 14px; height: auto; aspect-ratio: 2151 / 353; object-fit: cover; object-position: center 47%; pointer-events: none; }
+        .tn-close {
+            position: absolute; top: 12px; right: 12px; z-index: 3; width: 38px; height: 38px; border-radius: 50%;
+            border: 1px solid #C8A45D; background: rgba(255,251,244,.95); color: #6E1725; font-size: 24px; line-height: 1; cursor: pointer;
+            box-shadow: 0 4px 12px -4px rgba(110,23,37,.4);
+        }
+        .tn-kicker { margin: 2px 0 6px; font-size: .78rem; letter-spacing: .3em; text-transform: uppercase; color: #A8843A; font-weight: 600; }
+        .tn-title { margin: 0 auto 12px; max-width: 26rem; font-family: 'Playfair Display', Georgia, serif; color: #6E1725; font-size: clamp(1.35rem, 5vw, 1.7rem); line-height: 1.25; }
+        .tn-intro { margin: 0 auto 18px; max-width: 30rem; color: #5a4a3a; font-size: 1rem; line-height: 1.55; }
+        .tn-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; text-align: left; counter-reset: none; }
+        .tn-item {
+            display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 16px;
+            background: rgba(255,255,255,.78); border: 1px solid rgba(200,164,93,.4);
+            box-shadow: 0 8px 20px -14px rgba(110,23,37,.45);
+        }
+        .tn-num {
+            flex: 0 0 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+            background: linear-gradient(145deg, #8B2A3D, #6E1725); color: #F4E2B4;
+            font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 1.05rem;
+            box-shadow: 0 0 0 3px #FFFBF4, 0 0 0 4px rgba(200,164,93,.7);
+        }
+        .tn-item h3 { margin: 4px 0 4px; font-family: 'Playfair Display', Georgia, serif; color: #6E1725; font-size: 1.08rem; line-height: 1.25; }
+        .tn-item p { margin: 0; color: #4f4136; font-size: .96rem; line-height: 1.55; }
+        .tn-kids { display: inline-block; margin: 18px auto 0; padding: 8px 16px; border-radius: 999px; background: rgba(200,164,93,.18); color: #6E4E14; font-weight: 600; font-size: .95rem; }
+        .tn-thanks { margin: 18px auto 6px; max-width: 30rem; color: #5a4a3a; font-style: italic; line-height: 1.55; }
+        .tn-sign { margin: 6px 0 0; font-family: 'Great Vibes', 'Playfair Display', cursive; color: #6E1725; font-size: 1.7rem; }
+        body.tn-open { overflow: hidden; }
+        .tips-icon-img { display: block; width: auto; height: 100px; max-width: 130px; object-fit: contain; transition: transform .35s ease; }
+        .party-card:hover .tips-icon-img { transform: scale(1.06) rotate(-2deg); }
+        @media (max-width: 768px) { .party-grid { justify-items: center; } .party-card { width: 100%; box-sizing: border-box; } [data-fx="left"], [data-fx="right"] { transform: translateY(38px); } }
     </style>
 </head>
 <body>
@@ -725,14 +769,7 @@
                     </div>
 
                     <div class="party-card">
-                        <div class="party-icon modern-icon">
-                            <svg width="110" height="110" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="32" cy="32" r="26" fill="none" stroke="#6E1725" stroke-width="4"/>
-                                <circle cx="32" cy="23" r="6" fill="#6E1725"/>
-                                <path d="M20 45 C20 35 44 35 44 45" fill="#6E1725"/>
-                                <line x1="11" y1="53" x2="53" y2="11" stroke="#6E1725" stroke-width="4" stroke-linecap="round"/>
-                            </svg>
-                        </div>
+                        <div class="party-icon modern-icon"><img src="icono-tips.png" alt="" class="tips-icon-img" width="260" height="233"></div>
                         <h3>Tips y Notas</h3>
                         <button class="btn-wedding" onclick="showTips()">Ver más</button>
                     </div>
@@ -796,13 +833,40 @@
         </div>
 
         <!-- Modal Tips y Notas -->
-        <div id="tipsModal" class="modal-overlay" onclick="closeTipsModal(event)">
-            <div class="dresscode-modal" onclick="event.stopPropagation()">
-                <button class="modal-close" onclick="closeTipsModal()" aria-label="Cerrar">&times;</button>
-                <h2 class="modal-title-dark">Tips y Notas</h2>
-                <p class="modal-text-dark"><strong>Los niños son bienvenidos.</strong></p>
-                <p class="modal-text-dark">Los más pequeños de la familia también están invitados a celebrar con nosotros este día tan especial.</p>
-                <p class="modal-text-dark">La ceremonia inicia a las 4:00pm en punto; les agradecemos llegar con tiempo.</p>
+        <div id="tipsModal" class="modal-overlay tn-overlay" onclick="closeTipsModal(event)" role="dialog" aria-modal="true" aria-labelledby="tnTitle">
+            <div class="tn-sheet" onclick="event.stopPropagation()">
+                <button class="tn-close" onclick="closeTipsModal()" aria-label="Cerrar">&times;</button>
+                <div class="tn-scroll">
+                    <img class="tn-garland" src="separador-flores.png" alt="">
+                    <p class="tn-kicker">🤍 Tips y Notas</p>
+                    <h2 class="tn-title" id="tnTitle">5 tips y notas importantes para que disfrutes mejor de nuestra boda</h2>
+                    <p class="tn-intro">Queremos que todos disfruten de este día tan especial con nosotros. Por eso, les compartimos algunas recomendaciones importantes:</p>
+                    <ol class="tn-list">
+                    <li class="tn-item">
+                        <span class="tn-num">1</span>
+                        <div><h3>Vestimenta adecuada</h3><p>Les pedimos cuidar la formalidad de sus atuendos. En las damas, evitar transparencias y escotes pronunciados. En los caballeros, utilizar pantalones formales, sin rotos ni desgastes.</p></div>
+                    </li>
+                    <li class="tn-item">
+                        <span class="tn-num">2</span>
+                        <div><h3>Respeto durante la Santa Misa</h3><p>Mantengamos el silencio y el debido respeto durante la celebración. Por favor, colocar los celulares en modo vibración o silencio para evitar distracciones.</p></div>
+                    </li>
+                    <li class="tn-item">
+                        <span class="tn-num">3</span>
+                        <div><h3>Fotografías y videos</h3><p>Pueden tomar sus fotografías, pero eviten hacerlo durante los momentos centrales de la misa, colocarse frente al sacerdote o bloquear el trabajo y la visibilidad del fotógrafo profesional.</p></div>
+                    </li>
+                    <li class="tn-item">
+                        <span class="tn-num">4</span>
+                        <div><h3>Puntualidad</h3><p>Les recomendamos llegar con anticipación para evitar perderse algún momento de la ceremonia. ¡Queremos compartir cada instante con ustedes!</p></div>
+                    </li>
+                    <li class="tn-item">
+                        <span class="tn-num">5</span>
+                        <div><h3>Disfrutar y vivir la celebración</h3><p>Les invitamos a participar con alegría, respeto y disposición. Evitemos levantarnos o desplazarnos innecesariamente durante la ceremonia para mantener el orden y la solemnidad de este momento tan especial.</p></div>
+                    </li>
+                    </ol>
+                    <div class="tn-kids">Los niños son bienvenidos.</div>
+                    <p class="tn-thanks">Gracias por acompañarnos y ayudarnos a hacer de este día una celebración llena de amor, fe y bendiciones. 🤍</p>
+                    <p class="tn-sign">Con cariño, los novios 💍</p>
+                </div>
             </div>
         </div>
 
@@ -950,7 +1014,7 @@
             onScroll();
         })();
         </script>
-        <script src="JAVAB.js?v=23" defer></script>
+        <script src="JAVAB.js?v=24" defer></script>
         <script src="regalo-modal.js?v=5" defer></script>
 </body>
 </html>
