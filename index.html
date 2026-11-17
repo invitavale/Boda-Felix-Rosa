@@ -502,6 +502,32 @@
             [data-fx], [data-fx] img { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; transition: none !important; }
             .section-divider img[data-fx="bloom"] { transform: translateY(-50%) !important; }
         }
+        /* ===== Solo PC (≥ 769px): móvil queda igual ===== */
+        @media (min-width: 769px) {
+            /* Guirnalda completa, sin recortar arriba/abajo ni a los lados */
+            .section-divider img {
+                left: 0; right: 0; margin: 0 auto;
+                width: min(100%, 940px); height: auto;
+                aspect-ratio: 2151 / 353;
+                object-fit: cover; object-position: center 47%;
+            }
+            /* Más aire para que la guirnalda no tape títulos ni contenido */
+            .content > section, .content > footer { padding-top: 6.5rem !important; padding-bottom: 6.5rem !important; }
+            .countdown-section { padding-top: 6rem !important; padding-bottom: 6rem !important; }
+            .content > footer { padding-bottom: 3rem !important; }
+            .countdown-section .section-title { margin-bottom: 1.6rem; }
+            /* Carrusel: más ancho y los laterales se desvanecen en vez de cortarse */
+            .cf { max-width: 1040px; }
+            .cf-stage {
+                -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+                        mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+            }
+            .cf-prev { left: 2%; } .cf-next { right: 2%; }
+            /* Tarjetas de detalles con la misma altura de contenido */
+            .party-card { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+            /* Columna con sombra suave para separarla del fondo */
+            .content { box-shadow: 0 0 60px rgba(20,4,8,.35); }
+        }
     </style>
 </head>
 <body>
@@ -893,12 +919,17 @@
             var heroBg = document.querySelector('.hero-bg');
             var heroNames = document.querySelector('.hero-names');
             var chapel = document.querySelector('.capilla-pic img');
+            var heroTop = document.querySelector('.hero-section .top-garland, .hero-garland, .hero .garland-top');
             var ticking = false;
             function onScroll() {
                 var vh = window.innerHeight, y = window.scrollY;
                 var p = Math.min(Math.max(y / vh, 0), 1);
                 if (heroBg) { heroBg.style.scale = (1 + p * 0.12).toFixed(4); heroBg.style.filter = 'brightness(' + (1 - p * 0.35).toFixed(3) + ')'; }
                 if (heroNames) { heroNames.style.translate = '0 ' + (-p * 90).toFixed(1) + 'px'; heroNames.style.opacity = Math.max(0, 1 - p * 1.4).toFixed(3); }
+                if (window.innerWidth >= 769) {
+                    if (heroTop) heroTop.style.opacity = Math.max(0, 1 - p * 1.6).toFixed(3);
+                    if (heroBg) heroBg.style.filter = 'brightness(' + (1 - p * 0.4).toFixed(3) + ') blur(' + (p * 6).toFixed(1) + 'px)';
+                } else if (heroTop) heroTop.style.opacity = '';
                 if (chapel && chapel.parentNode.classList.contains('fx-in')) {
                     var r = chapel.getBoundingClientRect();
                     var c = (r.top + r.height / 2 - vh / 2) / vh; // -1..1
