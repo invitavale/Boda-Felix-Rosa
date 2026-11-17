@@ -1,0 +1,237 @@
+/* ===== Modal de Regalos (módulo reutilizable) =====
+   Archivos: regalo-modal.css + regalo-modal.js + regalo-fondo.jpg */
+.rg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(28, 20, 8, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+.rg-overlay.open { opacity: 1; visibility: visible; }
+
+.rg-sheet {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    border-radius: 24px;
+    background: #FFFBF4;
+    border: 1px solid rgba(201, 164, 62, .55);
+    box-shadow: 0 30px 60px -20px rgba(40, 25, 5, .55);
+    transform: translateY(24px) scale(.97);
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #2E2414;
+    text-align: center;
+}
+.rg-overlay.open .rg-sheet { transform: none; }
+
+.rg-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 164, 62, .6);
+    background: rgba(255, 251, 244, .9);
+    color: #6E4E14;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+.rg-back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(201, 164, 62, .6);
+    background: rgba(255, 251, 244, .9);
+    color: #6E4E14;
+    font: 600 14px 'Cormorant Garamond', Georgia, serif;
+    cursor: pointer;
+}
+
+/* Paso 1: elegir opción */
+.rg-choose { padding: 40px 22px 26px; }
+.rg-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    color: #8A6420;
+    margin-bottom: 4px;
+}
+.rg-sub { font-size: 1.05rem; color: rgba(46, 36, 20, .75); margin-bottom: 22px; }
+
+.rg-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(201, 164, 62, .5);
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.rg-option:hover { transform: translateY(-2px); box-shadow: 0 8px 22px -10px rgba(138, 100, 32, .45); border-color: #C9A43E; }
+.rg-option-icon {
+    flex: 0 0 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(120deg, #8A6420 0%, #C9A43E 35%, #EBD48C 50%, #C9A43E 65%, #8A6420 100%);
+    color: #fff;
+}
+.rg-option-text strong { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: #6E4E14; }
+.rg-option-text span { font-size: .98rem; color: rgba(46, 36, 20, .7); }
+.rg-option-arrow { margin-left: auto; color: #C9A43E; font-size: 1.3rem; }
+
+/* Paso 2: datos bancarios con fondo de papel */
+.rg-bank {
+    position: relative;
+    padding: 58px 18px 22px;
+    background: #F5EEE3 url('regalo-fondo.jpg') center / cover no-repeat;
+    border-radius: 24px;
+}
+.rg-bank-card {
+    position: relative;
+    padding: 4px 4px 0;
+}
+.rg-bank-card .rg-title { font-size: 2.2rem; margin-bottom: 12px; }
+
+.rg-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-top: 8px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(201, 164, 62, .35);
+    text-align: left;
+}
+.rg-row-text { flex: 1; min-width: 0; }
+.rg-label { display: block; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: #8A6420; font-weight: 600; }
+.rg-value { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 1.12rem; color: #2E2414; word-break: break-all; }
+
+.rg-copy {
+    flex: 0 0 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(201, 164, 62, .6);
+    background: #FFFBF4;
+    color: #8A6420;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background .2s ease, color .2s ease;
+}
+.rg-copy:hover { background: #F6EBCF; }
+.rg-copy.copied { background: #8A6420; color: #fff; border-color: #8A6420; }
+
+.rg-note { margin-top: 12px; font-size: .95rem; color: rgba(46, 36, 20, .75); font-style: italic; }
+
+.rg-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    z-index: 2100;
+    transform: translate(-50%, 20px);
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #2E2414;
+    color: #F6EBCF;
+    font: 600 15px 'Cormorant Garamond', Georgia, serif;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .25s ease;
+}
+.rg-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.rg-hidden { display: none !important; }
+
+/* Código de vestimenta: imagen flotante */
+.rg-dress {
+    max-width: 480px;
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+}
+.rg-dress img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* ===== Varias cuentas bancarias (acordeón) ===== */
+.rg-bank-hint { font-size: .95rem; color: rgba(46,36,20,.7); margin: -4px 0 10px; font-style: italic; }
+.rg-acct {
+    margin-top: 10px;
+    border-radius: 14px;
+    background: rgba(255,251,244,.92);
+    border: 1px solid rgba(201,164,62,.45);
+    text-align: left;
+    overflow: hidden;
+}
+.rg-acct summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 40px 12px 14px;
+    position: relative;
+}
+.rg-acct summary::-webkit-details-marker { display: none; }
+.rg-acct summary::after {
+    content: '›';
+    position: absolute; right: 14px; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    color: #C9A43E; font-size: 1.4rem; transition: transform .2s ease;
+}
+.rg-acct[open] summary::after { transform: translateY(-50%) rotate(-90deg); }
+.rg-acct-bank { display: block; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 1.08rem; color: #6E4E14; }
+.rg-acct-name { display: block; font-size: .98rem; color: rgba(46,36,20,.75); }
+.rg-acct-body { padding: 0 10px 12px; }
+.rg-acct-body .rg-row { margin-top: 6px; }
+.rg-acct-note { margin-top: 8px; font-size: .9rem; color: rgba(46,36,20,.7); font-style: italic; padding: 0 4px; }
+
+/* ===== Código de vestimenta en texto ===== */
+.rg-dress-body { padding: 44px 24px 26px; background: #FFFBF4; }
+.rg-dress-kind {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: .3em; text-transform: uppercase;
+    color: #6E1725; font-size: 1.15rem; margin: 2px 0 18px;
+}
+.rg-dress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rg-dress-item {
+    padding: 14px 10px; border-radius: 14px; background: #fff;
+    border: 1px solid rgba(201,164,62,.4);
+}
+.rg-dress-item strong { display: block; font-family: 'Playfair Display', Georgia, serif; color: #6E4E14; font-size: 1.05rem; margin-bottom: 4px; }
+.rg-dress-item span { font-size: 1rem; color: rgba(46,36,20,.8); line-height: 1.3; }
+.rg-dress-warn {
+    display: flex; align-items: center; gap: 12px; text-align: left;
+    margin-top: 14px; padding: 14px; border-radius: 14px;
+    background: #F6E4E2; color: #5a2a2a; font-size: 1.02rem; line-height: 1.35;
+}
+.rg-dress-ban { font-size: 2rem; color: #6E1725; line-height: 1; }
